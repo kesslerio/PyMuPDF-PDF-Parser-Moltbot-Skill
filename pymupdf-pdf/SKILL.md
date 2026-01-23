@@ -14,6 +14,7 @@ If you hit import errors (PyMuPDF not installed) or Nix `libstdc++` issues, read
 
 ## Quick start (single PDF)
 ```bash
+# Run from the skill directory
 ./scripts/pymupdf_parse.py /path/to/file.pdf \
   --format md \
   --outroot ./pymupdf-output
@@ -35,7 +36,4 @@ If you hit import errors (PyMuPDF not installed) or Nix `libstdc++` issues, read
 
 ## Notes
 - PyMuPDF is fast but less robust on complex PDFs.
-- For more robust parsing, use MinerU skill once installed.
-
-## References
-- `references/pymupdf-notes.md`
+- For more robust parsing, use a heavy-duty OCR parser (e.g., MinerU) if installed.
