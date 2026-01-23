@@ -13,6 +13,7 @@ pip install pymupdf
 
 Nix note (if import fails with libstdc++ missing):
 ```bash
-# Example: pick a gcc lib path from /nix/store/*gcc*/lib
-export LD_LIBRARY_PATH=/nix/store/xc0ga87wdclrx54qjaryahkkmkmqi9qz-gcc-15.2.0-lib/lib
+# Find a gcc lib path and export it:
+ls /nix/store/*gcc*/lib/libstdc++.so.6 2>/dev/null | head -1
+export LD_LIBRARY_PATH=/nix/store/<your-gcc-lib-hash>-gcc-<version>-lib/lib
 ```
