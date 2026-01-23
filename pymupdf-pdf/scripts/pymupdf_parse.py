@@ -11,7 +11,11 @@ import fitz  # PyMuPDF
 def extract_markdown(doc: fitz.Document) -> str:
     parts = []
     for i, page in enumerate(doc, start=1):
-        text = page.get_text("markdown")
+        try:
+            text = page.get_text("markdown")
+        except Exception:
+            # Fallback for PyMuPDF versions without markdown support
+            text = page.get_text("text")
         if text:
             parts.append(f"\n\n<!-- page {i} -->\n\n")
             parts.append(text)
