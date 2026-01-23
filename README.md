@@ -15,6 +15,12 @@ A [Clawdbot](https://github.com/clawdbot/clawdbot) skill for fast, lightweight P
 - **Image extraction** — Optional embedded image extraction
 - **NixOS compatible** — Includes notes for libstdc++ issues
 
+## Version
+
+Current: **v1.0.0**
+
+See [CHANGELOG](CHANGELOG.md) for version history.
+
 ## Installation
 
 ### Prerequisites
