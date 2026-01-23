@@ -104,7 +104,7 @@ PyMuPDF produces **fast, minimal output**:
 
 ## License
 
-MIT
+Apache 2.0
 
 ## Contributing
 
