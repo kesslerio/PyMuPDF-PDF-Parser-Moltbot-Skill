@@ -22,14 +22,14 @@ def extract_markdown(doc: fitz.Document) -> str:
     return "".join(parts).strip() + "\n"
 
 
-def extract_json(doc: fitz.Document) -> dict:
+def extract_json(doc: fitz.Document, lang: str) -> dict:
     pages = []
     for i, page in enumerate(doc, start=1):
         pages.append({
             "page": i,
             "text": page.get_text("text")
         })
-    return {"pages": pages}
+    return {"lang": lang, "pages": pages}
 
 
 def extract_images(doc: fitz.Document, outdir: Path) -> int:
@@ -76,24 +76,23 @@ def main():
     outdir = Path(args.outroot) / pdf_path.stem
     outdir.mkdir(parents=True, exist_ok=True)
 
-    doc = fitz.open(pdf_path)
+    with fitz.open(pdf_path) as doc:
+        if args.format in ("md", "both"):
+            md = extract_markdown(doc)
+            (outdir / "output.md").write_text(md, encoding="utf-8")
 
-    if args.format in ("md", "both"):
-        md = extract_markdown(doc)
-        (outdir / "output.md").write_text(md, encoding="utf-8")
+        if args.format in ("json", "both"):
+            data = extract_json(doc, args.lang)
+            (outdir / "output.json").write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    if args.format in ("json", "both"):
-        data = extract_json(doc)
-        (outdir / "output.json").write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+        if args.images:
+            img_dir = outdir / "images"
+            img_dir.mkdir(exist_ok=True)
+            extract_images(doc, img_dir)
 
-    if args.images:
-        img_dir = outdir / "images"
-        img_dir.mkdir(exist_ok=True)
-        extract_images(doc, img_dir)
-
-    if args.tables:
-        tables = extract_tables_basic(doc)
-        (outdir / "tables.json").write_text(json.dumps(tables, ensure_ascii=False, indent=2), encoding="utf-8")
+        if args.tables:
+            tables = extract_tables_basic(doc)
+            (outdir / "tables.json").write_text(json.dumps(tables, ensure_ascii=False, indent=2), encoding="utf-8")
 
     print(f"Done. Output: {outdir}")
 
