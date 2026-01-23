@@ -1,5 +1,9 @@
 # PyMuPDF PDF Parser - Clawdbot Skill
 
+[![ClawdHub](https://img.shields.io/badge/ClawdHub-pymupdf--pdf--parser--clawdbot--skill-blue)](https://clawdhub.com/skill/pymupdf-pdf-parser-clawdbot-skill)
+[![Version](https://img.shields.io/badge/Version-1.0.0-green)](https://clawdhub.com/skill/pymupdf-pdf-parser-clawdbot-skill)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue)](https://www.apache.org/licenses/LICENSE-2.0)
+
 A [Clawdbot](https://github.com/clawdbot/clawdbot) skill for fast, lightweight PDF parsing using [PyMuPDF](https://pymupdf.readthedocs.io/) (fitz). Ideal for quick text extraction when speed matters.
 
 ## Features
